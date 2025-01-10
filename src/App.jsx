@@ -1,35 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react";
+import Loader from "./component/loader";
+import SearchBar from "./component/search";
+import {
+  getLocationWeather,
+  getLocationWeatherForecast,
+} from "./service/weatherService";
+import WeatherCard from "./component/weatherCard";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [loading, setLoading] = useState(false);
+  const [currentWeatherInfo, setCurr] = useState(undefined);
+  const [intervalId, setIntervalId] = useState(undefined);
+  const [errorMessage, setErrorMsg] = useState(undefined);
+
+  function submit(location) {
+    if (intervalId != undefined){
+      clearInterval(intervalId)
+    }
+    const func = () => {
+      setLoading(true);
+      getLocationWeather(location)
+        .then((value) => {
+          setCurr(value);
+          setErrorMsg(undefined);
+        })
+        .catch((reason) => {
+          console.log(reason);
+          setErrorMsg(reason);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
+
+    func();
+    const id = setInterval(func,60000);
+    setIntervalId(id);
+  }
 
   return (
     <>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <SearchBar onSubmit={submit} />
+        {loading ? <Loader /> : <></>}
+        {!loading && errorMessage != undefined ? (
+          <div>{errorMessage}</div>
+        ) : (
+          <></>
+        )}
+        {!loading && currentWeatherInfo !== undefined ? (
+          <WeatherCard data={currentWeatherInfo} />
+        ) : (
+          <></>
+        )}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
