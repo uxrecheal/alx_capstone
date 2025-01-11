@@ -7,6 +7,76 @@ body {
     rgba(32, 22, 161, 1) 100%
   );
 }
+@media (max-width: 768px) {
+  .app-name {
+    font-size: 20px;
+    left: 10px;
+    top: 10px;
+  }
+
+  .search-bar {
+    width: 160px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-left: 20px;
+  }
+
+  .search-input {
+    padding: 10px 12px;
+    width: 100%;
+  }
+
+  .button-group {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .btn {
+    width: 48%;
+  }
+  .weather-card {
+    width: 240px;
+  }
+
+  .temp {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-name {
+    font-size: 18px;
+  }
+
+  .search-bar {
+    width: 130px;
+    align-items: stretch;
+  }
+
+  .search-input {
+    padding: 6px 10px;
+  }
+  .search-input::placeholder {
+   font-size: 12px;
+  }
+
+  .btn {
+    width: 110px;
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  .weather-card {
+    width: 200px;
+    padding: 16px;
+  }
+
+  .temp {
+    font-size: 24px;
+  }
+}
 
 #root {
   max-width: 1280px;
