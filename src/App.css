@@ -2,9 +2,7 @@
   margin: 0;
   box-sizing: border-box;
 }
-
-body {
-  height: 100vh;
+html {
   background: rgb(53, 145, 243);
   background: linear-gradient(
     135deg,
@@ -12,6 +10,17 @@ body {
     rgba(31, 95, 224, 1) 66%,
     rgba(32, 22, 161, 1) 100%
   );
+}
+
+body {
+  height: 100vh;
+  /* background: rgb(53, 145, 243);
+  background: linear-gradient(
+    135deg,
+    rgba(53, 145, 243, 1) 0%,
+    rgba(31, 95, 224, 1) 66%,
+    rgba(32, 22, 161, 1) 100%
+  ); */
 }
 
 .main {
