@@ -7,7 +7,7 @@ async function getLatLonLocation(location) {
   let response;
   try {
     let limit = `1`;
-    let latLonUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=${limit}&appid=${apiKey}`;
+    let latLonUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=${limit}&appid=${apiKey}`;
 
     response = await axios({
       method: "get",
