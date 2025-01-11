@@ -15,8 +15,8 @@ function App() {
   const [errorMessage, setErrorMsg] = useState(undefined);
 
   function submit(location) {
-    if (intervalId != undefined){
-      clearInterval(intervalId)
+    if (intervalId != undefined) {
+      clearInterval(intervalId);
     }
     const func = () => {
       setLoading(true);
@@ -32,17 +32,17 @@ function App() {
         .finally(() => {
           setLoading(false);
         });
-    }
+    };
 
     func();
-    const id = setInterval(func,60000);
+    const id = setInterval(func, 60000);
     setIntervalId(id);
   }
 
   return (
-    <>
-      <div>
-        <SearchBar onSubmit={submit} />
+    <div className="main">
+      <SearchBar onSubmit={submit} />
+      <div className="content">
         {loading ? <Loader /> : <></>}
         {!loading && errorMessage != undefined ? (
           <div>{errorMessage}</div>
@@ -55,7 +55,7 @@ function App() {
           <></>
         )}
       </div>
-    </>
+    </div>
   );
 }
 
